@@ -1,7 +1,8 @@
-from flask import Flask, redirect, url_for, request, jsonify
+from flask import Flask, redirect, url_for, request, jsonify, render_template
 from VersionScraper import get_versions
 from flask_sqlalchemy import SQLAlchemy
 import json
+import re
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///versions.sqlite3'
@@ -35,7 +36,21 @@ def get_response(software, version):
 		item = item[0]
 	return item
 
-@app.route('/version_track')
+def get_pos(response, ver):
+	regex = re.compile(r'[^\d.]+')
+	versions = response['versions']
+	versions = [regex.sub('', version) for version in versions]
+
+	for index in range(len(versions)):
+		if versions[index] == ver or versions[index].startswith(ver):
+			return index + 1
+	return -1
+
+@app.route('/')
+def index():
+	return render_template('index.html')
+
+@app.route('/version_track/api')
 def version_track():
 	software = request.args.get('name')
 	version = request.args.get('version')
@@ -44,12 +59,25 @@ def version_track():
 	soft = get_response(software, version)
 
 	response = {}
-	response['status'] = 'FOUND'
+	response['software_found'] = "FOUND"
 	response['name'] = soft.name
 	response['number_of_versions'] = soft.num_of_ver
 	response['versions'] = json.loads(soft.versions)
+	response['latest_version'] = response['versions'][0]
 	response['initial_release'] = soft.initial_release
-	
+
+	pos = get_pos(response, version)
+	if pos == -1:
+		response['version_found'] = "NOT_FOUND"
+		return jsonify(response)
+
+	response['num_of_new_versions'] = pos - 1
+
+	if (pos - 1 >= 5):
+		response['is_obsolete'] = "OBSOLETE"
+	else:
+		response['is_obsolete'] = "NOT_OBSOLETE"
+
 	return jsonify(response)
 
 if __name__ == "__main__":
