@@ -28,6 +28,8 @@ def get_response(software, version):
 	print (item)
 	if len(item) == 0:
 		response = get_versions('_'.join(software.split()))
+		if (response['found'] == 'NOT_FOUND'):
+			return -1
 		soft_obj = VersionDB(software, json.dumps(response['versions']), response['number_of_versions'], response['initial_release'])
 		db.session.add(soft_obj)
 		db.session.commit()
@@ -59,6 +61,9 @@ def version_track():
 	soft = get_response(software, version)
 
 	response = {}
+	if soft == -1:
+		response['software_found'] = 'NOT_FOUND'
+		return jsonify(response)
 	response['software_found'] = "FOUND"
 	response['name'] = soft.name
 	response['number_of_versions'] = soft.num_of_ver
