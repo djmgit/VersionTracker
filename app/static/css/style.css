@@ -1,0 +1,13 @@
+#title {
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.view-all {
+	cursor: pointer;
+}
+
+.view-all:hover {
+	color: #424242;
+}

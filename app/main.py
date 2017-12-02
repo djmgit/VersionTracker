@@ -70,6 +70,7 @@ def version_track():
 	if pos == -1:
 		response['version_found'] = "NOT_FOUND"
 		return jsonify(response)
+	response['version_found'] = "FOUND"
 
 	response['num_of_new_versions'] = pos - 1
 

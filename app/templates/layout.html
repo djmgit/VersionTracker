@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>BadgeYay</title>
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        {% block style %}{% endblock%}
+    </head>
+    
+    <body>
+        {% block body %}{% endblock %}
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+        <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>    
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>    
+    </body>
+
+</html>
