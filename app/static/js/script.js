@@ -1,6 +1,12 @@
 var app = angular.module('vtApp', []);
 app.controller('vtCtrl', function($scope, $http) {
 	var status = "";
+    $(".modal").modal();
+
+    $scope.openModal = function() {
+        $("#version-info").modal('open');
+        console.log("hahaaaaaaaaaaaaaaaaaaaaaaa");
+    }
 
     $scope.searchSoft = function() {
     	var software = $scope.software;
@@ -10,6 +16,8 @@ app.controller('vtCtrl', function($scope, $http) {
     		return;
     	}
 
+        $(".waiting").show();
+
     	$http.get('/version_track/api?name=' + software + '&version=' + version).then(function(response) {
     		console.log(response.data);
             var softwareFound = response.data.software_found;
@@ -18,8 +26,11 @@ app.controller('vtCtrl', function($scope, $http) {
                 return;
             }
 
+            $(".card-title").html(software + ' : ' + version);
     		$scope.latestVersion = response.data.latest_version;
     		$scope.initialVersion = response.data.initial_release;
+            $scope.versions = response.data.versions;
+            console.log($scope.versions);
     		
             if (versionFound === "NOT_FOUND") {
                 status = "The desired version of the software is not found. Unable to provide any information. \
@@ -41,6 +52,9 @@ app.controller('vtCtrl', function($scope, $http) {
             }
 
             $scope.status = status;
+            $(".waiting").hide();
+            $(".intro").hide();
+            $(".soft-content").show();
     	});
     }
 });

@@ -11,3 +11,16 @@
 .view-all:hover {
 	color: #424242;
 }
+
+.waiting {
+	margin-top: 14px;
+	display: none;
+}
+
+.soft-content {
+	display: none;
+}
+
+.intro {
+	text-align: center;
+}
