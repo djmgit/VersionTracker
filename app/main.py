@@ -3,9 +3,13 @@ from VersionScraper import get_versions
 from flask_sqlalchemy import SQLAlchemy
 import json
 import re
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///versions.sqlite3'
+if os.environ.get('DATABASE_URL') is None:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///versions.sqlite3'
+else:
+	app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SECRET_KEY'] = "THIS IS SECRET"
 
 db = SQLAlchemy(app)
