@@ -1,3 +1,2 @@
 *.pyc
 app/__pycache__
-app/migrations/
