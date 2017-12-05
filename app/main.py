@@ -7,7 +7,8 @@ import os
 
 app = Flask(__name__)
 if os.environ.get('DATABASE_URL') is None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///versions.sqlite3'
+    #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///versions.sqlite3'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/deep'
 else:
 	app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SECRET_KEY'] = "THIS IS SECRET"
@@ -15,6 +16,8 @@ app.config['SECRET_KEY'] = "THIS IS SECRET"
 db = SQLAlchemy(app)
 
 class VersionDB(db.Model):
+	__tablename__ = 'versiondb'
+
 	id = db.Column('software_id', db.Integer, primary_key=True)
 	name = db.Column(db.String)
 	versions = db.Column(db.String)
@@ -26,6 +29,7 @@ class VersionDB(db.Model):
 		self.versions = versions
 		self.num_of_ver = num_of_ver
 		self.initial_release = initial_release
+
 
 def get_response(software, version):
 	item = VersionDB.query.filter_by(name=software).all()

@@ -2,5 +2,6 @@ requests
 beautifulsoup4
 Flask
 flask-sqlalchemy
+Flask-Migrate==1.8.0
 psycopg2
-gunicorn==19.1.1
+gunicorn
