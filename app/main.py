@@ -57,6 +57,8 @@ class VersionDBView(ModelView):
     can_view_details = True
     column_searchable_list = ['name']
     edit_modal = True
+    column_exclude_list = ['versions']
+    column_filters = ['name']
 
 admin = Admin(app, name='VersionTracker', template_mode='bootstrap3')
 admin.add_view(AdminAdd(name='Add software', endpoint='adminadd'))
