@@ -1,0 +1,49 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Add new software and versions</h4>
+    </div>
+    <div class="panel-body">
+      <form method="POST", action="/admin/adminadd/" onsubmit="return verifyAdminAdd()">
+        <div class="form-group">
+          <label for="name">
+            Enter software name
+          </label>
+          <input type="text" class="form-control" name="name" placeholder="Enter name of the software" id="name">
+        </div>
+        <div class="form-group">
+          <label for="versions">
+            Enter versions
+          </label>
+          <textarea class="form-control" name="versions" id="versions"
+                 placeholder="Enter versions separated by comma, For example: 55.0,55.1.1 etc">
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label for="numversions">
+            Enter number of versions
+          </label>
+          <input type="number" class="form-control" name="numversions" id="numversions"
+                 placeholder="Enter total number of versions you have entered">
+        </div>
+        <div class="form-group">
+          <label for="initialrelease">
+            Enter initial release date
+          </label>
+          <input type="text" class="form-control" name="initialrelease" id="initialrelease"
+                 placeholder="Enter initial release date of the software">
+        </div>
+        <div class="alert alert-danger error" style="display: none"></div>
+        <button type="submit" class="btn btn-default"> Submit </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
