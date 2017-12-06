@@ -14,7 +14,6 @@ else:
 app.config['SECRET_KEY'] = "THIS IS SECRET"
 
 db = SQLAlchemy(app)
-db.create_all();
 
 class VersionDB(db.Model):
 	__tablename__ = 'versiondb'
@@ -30,6 +29,8 @@ class VersionDB(db.Model):
 		self.versions = versions
 		self.num_of_ver = num_of_ver
 		self.initial_release = initial_release
+
+db.create_all();
 
 
 def get_response(software, version):
