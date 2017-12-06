@@ -1,6 +1,8 @@
 from flask import Flask, redirect, url_for, request, jsonify, render_template
 from VersionScraper import get_versions
 from flask_sqlalchemy import SQLAlchemy
+from flask_admin import Admin, BaseView, expose
+from flask_admin.contrib.sqla import ModelView
 import json
 import re
 import os
@@ -32,6 +34,18 @@ class VersionDB(db.Model):
 
 db.create_all();
 
+class MyView(BaseView):
+    @expose('/')
+    def index(self):
+        return self.render('admin-index.html')
+
+    @expose('/test/')
+    def test(self):
+    	return self.render('admin-index.html')
+
+
+admin = Admin(app)
+admin.add_view(ModelView(VersionDB, db.session))
 
 def get_response(software, version):
 	item = VersionDB.query.filter_by(name=software).all()
