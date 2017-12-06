@@ -52,11 +52,15 @@ class AdminAdd(BaseView):
         else:
             return self.render('admin-add.html')
 
-
+class VersionDBView(ModelView):
+    can_create = False
+    can_view_details = True
+    column_searchable_list = ['name']
+    edit_modal = True
 
 admin = Admin(app, name='VersionTracker', template_mode='bootstrap3')
-admin.add_view(AdminAdd(name='AdminAdd', endpoint='adminadd'))
-admin.add_view(ModelView(VersionDB, db.session))
+admin.add_view(AdminAdd(name='Add software', endpoint='adminadd'))
+admin.add_view(VersionDBView(VersionDB, db.session))
 
 def get_response(software, version):
     item = VersionDB.query.filter_by(name=software).all()
