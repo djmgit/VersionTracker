@@ -14,6 +14,7 @@ else:
 app.config['SECRET_KEY'] = "THIS IS SECRET"
 
 db = SQLAlchemy(app)
+db.create_all();
 
 class VersionDB(db.Model):
 	__tablename__ = 'versiondb'
