@@ -38,7 +38,16 @@ class AdminAdd(BaseView):
     @expose('/', methods=('GET', 'POST'))
     def index(self):
         if request.method == 'POST':
-            print (request.form)
+            name = request.form['name']
+            versions = request.form['versions']
+            num_of_ver = request.form['numversions']
+            initial_release = request.form['initialrelease']
+
+            versions_list = versions.split(',')
+            versions_list = [ver.strip() for ver in versions_list]
+            soft_obj = VersionDB(name, json.dumps(versions_list), int(num_of_ver), initial_release)
+            db.session.add(soft_obj)
+            db.session.commit()
             return self.render('admin-add.html')
         else:
             return self.render('admin-add.html')
