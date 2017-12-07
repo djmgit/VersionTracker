@@ -19,7 +19,7 @@ def xml_to_list(response):
 	return data
 
 
-def get_alternative(soft):
+def get_alternatives(soft):
 	xml_s = get_xml(soft)
 	xml_list = xml_to_list(xml_s)
 

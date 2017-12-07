@@ -32,6 +32,17 @@ class VersionDB(db.Model):
         self.num_of_ver = num_of_ver
         self.initial_release = initial_release
 
+class SimilarSoftwares(db.Model):
+    __tablename__ = 'similar_softwares'
+
+    id = db.Column('software_id', db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    alternatives = db.Column(db.String)
+
+    def __init__(self, name, alternatives):
+        self.name = name
+        self.alternatives = alternatives
+
 db.create_all();
 
 class AdminAdd(BaseView):
