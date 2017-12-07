@@ -72,9 +72,16 @@ class VersionDBView(ModelView):
     column_exclude_list = ['versions']
     column_filters = ['name']
 
+class SimilarSoftwaresDBView(ModelView):
+    can_create = False
+    column_searchable_list = ['name', 'alternatives']
+    edit_modal = True
+    column_filters = ['name']
+
 admin = Admin(app, name='VersionTracker', template_mode='bootstrap3')
 admin.add_view(AdminAdd(name='Add software', endpoint='adminadd'))
 admin.add_view(VersionDBView(VersionDB, db.session))
+admin.add_view(SimilarSoftwaresDBView(SimilarSoftwares, db.session))
 
 def get_response(software, version):
     item = VersionDB.query.filter_by(name=software).all()
