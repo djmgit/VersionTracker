@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, request, jsonify, render_template
 from VersionScraper import get_versions
+from AlternateScraper import get_alternatives
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
@@ -90,6 +91,23 @@ def get_response(software, version):
         item = item[0]
     return item
 
+def store_alternatives(software):
+    item = SimilarSoftwares.query.filter_by(name=software).all()
+    print (item)
+    if len(item) == 0:
+        response = get_alternatives(software)
+        response_final = []
+        for r in response:
+            if r != '':
+                response_final.append(r)
+        soft_obj = SimilarSoftwares(software, ','.join(response_final))
+        db.session.add(soft_obj)
+        db.session.commit()
+        item = SimilarSoftwares.query.filter_by(name=software).all()[0]
+    else:
+        item = item[0]
+    return item
+
 def get_pos(response, ver):
     regex = re.compile(r'[^\d.]+')
     versions = response['versions']
@@ -122,6 +140,7 @@ def version_track():
     response['versions'] = json.loads(soft.versions)
     response['latest_version'] = response['versions'][0]
     response['initial_release'] = soft.initial_release
+    response['similar_softwares'] = store_alternatives(software).alternatives.split(',')
 
     pos = get_pos(response, version)
     if pos == -1:

@@ -8,6 +8,10 @@
 	cursor: pointer;
 }
 
+.view-similar {
+	cursor: pointer;
+}
+
 .view-all:hover {
 	color: #424242;
 }

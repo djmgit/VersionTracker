@@ -79,6 +79,34 @@
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Done</a>
       </div>
     </div>
+    <div id="similar-soft-info" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>{{  "{{software}}"  }}</h4>
+        <p>
+          <div class="row versions-list">
+            <table class="highlight centered responsive-table">
+              <thead>
+                <tr>
+                  <th>
+                    Similar softwares
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="software in similarSoftwares track by $index">
+                  <td>
+                    {{  "{{software}}"  }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Done</a>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col s12 m6 offset-m3">
@@ -122,6 +150,12 @@
                 <div class="col s12 m4">
                   <div class="view-all grey-text" ng-click="openModal()">
                     View all releases
+                  </div>
+                </div>
+                <div class="col m2"></div>
+                <div class="col s12 m6">
+                  <div class="view-similar grey-text" ng-click="openModalSimilar()">
+                    View similar softwares
                   </div>
                 </div>
               </div>

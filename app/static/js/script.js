@@ -8,6 +8,10 @@ app.controller('vtCtrl', function($scope, $http) {
         console.log("hahaaaaaaaaaaaaaaaaaaaaaaa");
     }
 
+    $scope.openModalSimilar = function() {
+        $('#similar-soft-info').modal('open');
+    }
+
     $scope.searchSoft = function() {
     	var software = $scope.software;
     	var version = $scope.version;
@@ -30,6 +34,7 @@ app.controller('vtCtrl', function($scope, $http) {
     		$scope.latestVersion = response.data.latest_version;
     		$scope.initialVersion = response.data.initial_release;
             $scope.versions = response.data.versions;
+            $scope.similarSoftwares = response.data.similar_softwares;
             console.log($scope.versions);
     		
             if (versionFound === "NOT_FOUND") {
