@@ -1,0 +1,22 @@
+{% extends "layout_user.html" %}
+{% block body %}
+  <div id="main-app">
+    <div class="container">
+      <div class="row" style="padding-top: 20px;">
+        <div class="col s12 m6 offset-m3">
+          <form method='POST' action='/signup'>
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate" name="email" required>
+              <label for="email" data-error="Invalid email adress">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate" name="password" required>
+              <label for="password">Password</label>
+            </div>
+            <input type="submit" class="waves-effect waves-light btn">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

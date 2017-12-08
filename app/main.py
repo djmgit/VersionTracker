@@ -155,6 +155,14 @@ def contribute():
     else:
         return render_template('contribute.html')
 
+@app.route('/signup', methods=('GET', 'POST'))
+def signup():
+    if request.method == 'POST':
+        print (request.form)
+        return render_template('signup.html')
+    else:
+        return render_template('signup.html')
+
 @app.route('/version_track/api')
 def version_track():
     software = request.args.get('name')
