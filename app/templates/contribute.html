@@ -1,0 +1,58 @@
+{% extends "layout_user.html" %}
+{% block body %}
+  <div id="main-app">
+    <div class="container">
+      <div class="row" style="padding-top: 20px;">
+        <div class="col s12 m6 offset-m3">
+          
+            
+              <h4>Add new software</h4>
+            
+            
+              <form class="s12" method="POST" action="/contribute" onsubmit="return validateAdminAdd()">
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input id="name" type="text" name="name">
+                    <label for="name">Enter software name</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input id="initialrelease" type="text" 
+                           name="initialrelease">
+                    <label for="initialrelease">Enter initial release date</label>
+                  </div>
+                </div> 
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea class="materialize-textarea" id="versions" name="versions"
+                              placeholder="Enter versions separated by comma">
+                    	
+                    </textarea>
+                    <label for="versions">Enter versions</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="numversions" type="number" 
+                           name="numversions">
+                    <label for="numversions">Number of versions</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea class="materialize-textarea" id="similar-softwares" name="similar-softwares"
+                              placeholder="Enter similar softwares separated by comma">
+                    	
+                    </textarea>
+                    <label for="similar-softwares">Enter similar softwares</label>
+                  </div>
+                </div>
+                <div class="card-panel red lighten-4 red-text text-darken-4 error" style="display:none"></div>
+                <input type="submit" class="waves-effect waves-light btn">
+              </form>
+           
+          
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

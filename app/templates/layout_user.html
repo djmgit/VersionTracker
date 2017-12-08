@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>VersionTracker</title>
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
+        {% block style %}{% endblock%}
+    </head>
+    
+    <body>
+        <nav>
+          <div class="nav-wrapper">
+            <a href="/" class="brand-logo">VersionTracker</a>   
+              <ul class="hide-on-med-and-down right">               
+                  <li><a href="#">Hi User</a></li>         
+                  <li><a href="#">Log out</a></li>
+              </ul>
+          </div>
+        </nav>
+        {% block body %}{% endblock %}
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+        <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>    
+        <script src="{{ url_for('static', filename='js/form.js') }}"></script>    
+    </body>
+
+</html>

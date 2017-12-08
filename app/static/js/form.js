@@ -1,9 +1,10 @@
-function verifyAdminAdd() {
+function validateAdminAdd() {
+	var name = $("#name").val().trim();
+	var versions = $("#versions").val().trim();
+	var numversions = $("#numversions").val().trim();
+	var initialrelease = $("#initialrelease").val().trim();
+	var similarsoftwares = $('#similar-softwares').val().trim();
 
-	var name = $("#name").val();
-	var verions = $("#versions").val();
-	var numversions = $("#numversions").val();
-	var initialrelease = $("#initialrelease").val();
 	$(".error").hide();
 
 	if (name === "" || name === null) {
@@ -27,6 +28,12 @@ function verifyAdminAdd() {
 	if (initialrelease === "" || initialrelease === null) {
 		$(".error").show();
 		$(".error").html("Please enter initial release date of the software");
+		return false;
+	}
+
+	if (similarsoftwares === "" || similarsoftwares === null) {
+		$(".error").show();
+		$(".error").html("Please enter similar softwares");
 		return false;
 	}
 

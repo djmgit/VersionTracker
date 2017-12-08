@@ -50,14 +50,19 @@ class AdminAdd(BaseView):
     @expose('/', methods=('GET', 'POST'))
     def index(self):
         if request.method == 'POST':
-            name = request.form['name']
-            versions = request.form['versions']
-            num_of_ver = request.form['numversions']
-            initial_release = request.form['initialrelease']
+            print(request.form)
+            name = request.form['name'].strip()
+            versions = request.form['versions'].strip()
+            num_of_ver = request.form['numversions'].strip()
+            initial_release = request.form['initialrelease'].strip()
+            similar_softwares = request.form['similar-softwares'].strip()
 
             versions_list = versions.split(',')
             versions_list = [ver.strip() for ver in versions_list]
-            soft_obj = VersionDB(name, json.dumps(versions_list), int(num_of_ver), initial_release)
+            soft_obj = VersionDB(name, versions, int(num_of_ver), initial_release)
+            db.session.add(soft_obj)
+            db.session.commit()
+            soft_obj = SimilarSoftwares(name, similar_softwares)
             db.session.add(soft_obj)
             db.session.commit()
             return self.render('admin-add.html')
@@ -90,7 +95,7 @@ def get_response(software, version):
         response = get_versions('_'.join(software.split()))
         if (response['found'] == 'NOT_FOUND'):
             return -1
-        soft_obj = VersionDB(software, json.dumps(response['versions']), response['number_of_versions'], response['initial_release'])
+        soft_obj = VersionDB(software, ",".join(response['versions']), response['number_of_versions'], response['initial_release'])
         db.session.add(soft_obj)
         db.session.commit()
         item = VersionDB.query.filter_by(name=software).all()[0]
@@ -105,6 +110,7 @@ def store_alternatives(software):
         response = get_alternatives(software)
         response_final = []
         for r in response:
+            r = r.strip()
             if r != '':
                 response_final.append(r)
         soft_obj = SimilarSoftwares(software, ','.join(response_final))
@@ -129,6 +135,26 @@ def get_pos(response, ver):
 def index():
     return render_template('index.html')
 
+@app.route('/contribute', methods=('GET', 'POST'))
+def contribute():
+    print (request.method)
+    if request.method == 'POST':
+        name = request.form['name'].strip()
+        versions = request.form['versions'].strip()
+        num_of_ver = request.form['numversions'].strip()
+        initial_release = request.form['initialrelease'].strip()
+        similar_softwares = request.form['similar-softwares'].strip()
+
+        soft_obj = VersionDB(name, versions, int(num_of_ver), initial_release)
+        db.session.add(soft_obj)
+        db.session.commit()
+        soft_obj = SimilarSoftwares(name, similar_softwares)
+        db.session.add(soft_obj)
+        db.session.commit()
+        return render_template('contribute.html')
+    else:
+        return render_template('contribute.html')
+
 @app.route('/version_track/api')
 def version_track():
     software = request.args.get('name')
@@ -144,8 +170,10 @@ def version_track():
     response['software_found'] = "FOUND"
     response['name'] = soft.name
     response['number_of_versions'] = soft.num_of_ver
-    response['versions'] = json.loads(soft.versions)
-    response['latest_version'] = response['versions'][0]
+    versions = soft.versions.split(',')
+    versions = [ver.strip() for ver in versions]
+    response['versions'] = versions
+    response['latest_version'] = versions[0]
     response['initial_release'] = soft.initial_release
     response['similar_softwares'] = store_alternatives(software).alternatives.split(',')
 

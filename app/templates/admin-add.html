@@ -10,7 +10,7 @@
       <h4>Add new software and versions</h4>
     </div>
     <div class="panel-body">
-      <form method="POST", action="/admin/adminadd/" onsubmit="return verifyAdminAdd()">
+      <form method="POST" action="/admin/adminadd/" onsubmit="return validateAdminAdd()">
         <div class="form-group">
           <label for="name">
             Enter software name
@@ -22,8 +22,7 @@
             Enter versions
           </label>
           <textarea class="form-control" name="versions" id="versions"
-                 placeholder="Enter versions separated by comma, For example: 55.0,55.1.1 etc">
-          </textarea>
+                    placeholder="Enter versions separated by comma, For example: 55.0,55.1.1 etc"></textarea>
         </div>
         <div class="form-group">
           <label for="numversions">
@@ -38,6 +37,13 @@
           </label>
           <input type="text" class="form-control" name="initialrelease" id="initialrelease"
                  placeholder="Enter initial release date of the software">
+        </div>
+        <div class="form-group">
+          <label for="similar-softwares">
+            Enter similar softwares
+          </label>
+          <textarea class="form-control" name="similar-softwares" id="similar-softwares"
+                 placeholder="Enter alternatives to this software"></textarea>
         </div>
         <div class="alert alert-danger error" style="display: none"></div>
         <button type="submit" class="btn btn-default"> Submit </button>
