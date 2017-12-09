@@ -44,6 +44,25 @@ class SimilarSoftwares(db.Model):
         self.name = name
         self.alternatives = alternatives
 
+class User(db.Model):
+    __tablename__ = "users"
+
+    email = db.Column(db.String(80), primary_key=True, unique=True)
+    password = db.Column(db.String(80))
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
+    def __repr__(self):
+        return '<User %r>' % self.email
+    def is_authenticated(self):
+        return True
+    def is_active(self):
+        return True
+    def is_anonymous(self):
+        return False
+    def get_id(self):
+        return str(self.email)
+
 db.create_all();
 
 class AdminAdd(BaseView):
@@ -83,10 +102,15 @@ class SimilarSoftwaresDBView(ModelView):
     edit_modal = True
     column_filters = ['name']
 
+class UserDBView(ModelView):
+    can_create = False
+    column_searchable_list = ['email']
+
 admin = Admin(app, name='VersionTracker', template_mode='bootstrap3')
 admin.add_view(AdminAdd(name='Add software', endpoint='adminadd'))
 admin.add_view(VersionDBView(VersionDB, db.session))
 admin.add_view(SimilarSoftwaresDBView(SimilarSoftwares, db.session))
+admin.add_view(UserDBView(User, db.session))
 
 def get_response(software, version):
     item = VersionDB.query.filter_by(name=software).all()
@@ -158,10 +182,37 @@ def contribute():
 @app.route('/signup', methods=('GET', 'POST'))
 def signup():
     if request.method == 'POST':
-        print (request.form)
-        return render_template('signup.html')
+        email = request.form['email']
+        password = request.form['password']
+        if User.query.filter_by(email=email).first():
+            return render_template('signup.html')
+            # handle duplicate user case
+        else:
+            print (email, password)
+            newuser = User(email, password)
+            db.session.add(newuser)
+            db.session.commit()
+            return redirect(url_for('index'))
     else:
         return render_template('signup.html')
+
+@app.route('/login', methods=('GET', 'POST'))
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if user.password == password:
+                print ('successfully logged in')
+                return redirect(url_for('index'))
+            else:
+                print ('wronng password')
+                return render_template('login.html')
+        else:
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
 
 @app.route('/version_track/api')
 def version_track():
