@@ -4,6 +4,7 @@ from AlternateScraper import get_alternatives
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
+from flask_login import LoginManager, login_user, login_required, logout_user
 import json
 import re
 import os
@@ -106,11 +107,21 @@ class UserDBView(ModelView):
     can_create = False
     column_searchable_list = ['email']
 
+
+# setup admin
 admin = Admin(app, name='VersionTracker', template_mode='bootstrap3')
 admin.add_view(AdminAdd(name='Add software', endpoint='adminadd'))
 admin.add_view(VersionDBView(VersionDB, db.session))
 admin.add_view(SimilarSoftwaresDBView(SimilarSoftwares, db.session))
 admin.add_view(UserDBView(User, db.session))
+
+# setup authentication
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(email):
+    return User.query.filter_by(email=email).first()
 
 def get_response(software, version):
     item = VersionDB.query.filter_by(name=software).all()
@@ -160,6 +171,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/contribute', methods=('GET', 'POST'))
+@login_required
 def contribute():
     print (request.method)
     if request.method == 'POST':
@@ -192,6 +204,8 @@ def signup():
             newuser = User(email, password)
             db.session.add(newuser)
             db.session.commit()
+            # login user
+            login_user(newuser)
             return redirect(url_for('index'))
     else:
         return render_template('signup.html')
@@ -205,14 +219,24 @@ def login():
         if user:
             if user.password == password:
                 print ('successfully logged in')
+                # login user
+                login_user(user)
                 return redirect(url_for('index'))
             else:
+                # show error
                 print ('wronng password')
                 return render_template('login.html')
         else:
+            # user not found
             return render_template('login.html')
     else:
         return render_template('login.html')
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/version_track/api')
 def version_track():
