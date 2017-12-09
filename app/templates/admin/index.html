@@ -1,0 +1,25 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Welcome to <a href="/"> VerstionTracker </a> admin</h4>
+          </div>
+          <div class="panel-body">
+            {% if not current_user.is_authenticated %}
+              Please <a href="/login"> Login </a> using admin credentials to start
+              using admin features.
+            {% else %}
+              You are logged in as admin.
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+{% endblock %}
