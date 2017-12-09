@@ -3,6 +3,7 @@ beautifulsoup4
 Flask
 flask-sqlalchemy
 Flask-Migrate==1.8.0
+flask-login
 flask-admin
 psycopg2
 gunicorn
