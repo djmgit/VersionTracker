@@ -10,7 +10,7 @@
             <h4>Welcome to <a href="/"> VerstionTracker </a> admin</h4>
           </div>
           <div class="panel-body">
-            {% if not current_user.is_authenticated %}
+            {% if not current_user.is_authenticated or not current_user.email == 'admin@admin.com' %}
               Please <a href="/login"> Login </a> using admin credentials to start
               using admin features.
             {% else %}

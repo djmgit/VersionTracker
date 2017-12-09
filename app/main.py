@@ -68,7 +68,13 @@ db.create_all();
 
 class AdminAdd(BaseView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.is_authenticated:
+            if current_user.email == 'admin@admin.com' and current_user.password == 'admin123':
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
@@ -76,7 +82,6 @@ class AdminAdd(BaseView):
     @expose('/', methods=('GET', 'POST'))
     def index(self):
         if request.method == 'POST':
-            print(request.form)
             name = request.form['name'].strip()
             versions = request.form['versions'].strip()
             num_of_ver = request.form['numversions'].strip()
@@ -97,7 +102,13 @@ class AdminAdd(BaseView):
 
 class VersionDBView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.is_authenticated:
+            if current_user.email == 'admin@admin.com' and current_user.password == 'admin123':
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
@@ -111,7 +122,13 @@ class VersionDBView(ModelView):
 
 class SimilarSoftwaresDBView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.is_authenticated:
+            if current_user.email == 'admin@admin.com' and current_user.password == 'admin123':
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
@@ -123,7 +140,13 @@ class SimilarSoftwaresDBView(ModelView):
 
 class UserDBView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.is_authenticated:
+            if current_user.email == 'admin@admin.com' and current_user.password == 'admin123':
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
@@ -197,7 +220,6 @@ def index():
 @app.route('/contribute', methods=('GET', 'POST'))
 @login_required
 def contribute():
-    print (request.method)
     if request.method == 'POST':
         name = request.form['name'].strip()
         versions = request.form['versions'].strip()
@@ -224,7 +246,6 @@ def signup():
             return render_template('signup.html')
             # handle duplicate user case
         else:
-            print (email, password)
             newuser = User(email, password)
             db.session.add(newuser)
             db.session.commit()
@@ -243,15 +264,13 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if user.password == password:
-                print ('successfully logged in')
                 # login user
                 login_user(user)
                 g.user = current_user
-                print(current_user)
                 return redirect(url_for('index'))
             else:
                 # show error
-                print ('wronng password')
+                
                 return render_template('login.html')
         else:
             # user not found
