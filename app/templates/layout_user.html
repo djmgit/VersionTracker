@@ -17,8 +17,8 @@
               <ul class="hide-on-med-and-down right">               
                   {% if current_user.is_authenticated %}
                     <li><a href="#">Hi {{ current_user.email }}</a></li>
+                    <li><a href="/logout">Log out</a></li>
                   {% endif %}
-                  <li><a href="/logout">Log out</a></li>
               </ul>
           </div>
         </nav>
