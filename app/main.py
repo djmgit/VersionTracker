@@ -67,6 +67,12 @@ class User(db.Model):
 db.create_all();
 
 class AdminAdd(BaseView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
     @expose('/', methods=('GET', 'POST'))
     def index(self):
         if request.method == 'POST':
@@ -90,6 +96,12 @@ class AdminAdd(BaseView):
             return self.render('admin-add.html')
 
 class VersionDBView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
     can_create = False
     can_view_details = True
     column_searchable_list = ['name']
@@ -98,12 +110,24 @@ class VersionDBView(ModelView):
     column_filters = ['name']
 
 class SimilarSoftwaresDBView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
     can_create = False
     column_searchable_list = ['name', 'alternatives']
     edit_modal = True
     column_filters = ['name']
 
 class UserDBView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('login'))
     can_create = False
     column_searchable_list = ['email']
 
