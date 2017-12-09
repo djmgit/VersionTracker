@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as bs
+import traceback
 
 BASE_URL = "https://filehippo.com/"
 END_URL = "history/"
@@ -7,18 +8,22 @@ END_URL = "history/"
 def get_html_page(soft_name, page_no=""):
     URL = BASE_URL + "download_" + soft_name + "/" + END_URL + page_no
     print ("URL : {}".format(URL))
-    reponse = requests.get(URL)
-    print ("status code : {}".format(reponse.status_code))
-    return reponse.text
+    response = requests.get(URL)
+    print ("status code : {}".format(response.status_code))
+    return response.text, response.status_code
     #print (reponse.text)
 
 def get_versions(soft_name):
-    html = get_html_page(soft_name)
-    soup = bs(html, 'html.parser')
-
     versions = []
     response = {}
     dates = []
+
+    html, status_code = get_html_page(soft_name)
+    if status_code != 200:
+        print ('Not found')
+        response['found'] = "NOT_FOUND"
+        return response
+    soup = bs(html, 'html.parser')
 
     try:
         while True:
@@ -32,7 +37,7 @@ def get_versions(soft_name):
             if len(next_page) == 0:
                 break
             next_page_url = next_page[0].get('href')
-            html = get_html_page(soft_name, next_page_url.split('/')[-2])
+            html, status_code = get_html_page(soft_name, next_page_url.split('/')[-2])
             soup = bs(html, 'html.parser')
     
         response['number_of_versions'] = len(versions)
@@ -40,6 +45,7 @@ def get_versions(soft_name):
         response['versions'] = versions
         response['found'] = "FOUND"
     except:
+        traceback.print_exc()
         response['found'] = "NOT_FOUND"
 
     return response
