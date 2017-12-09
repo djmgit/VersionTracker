@@ -1,10 +1,10 @@
-from flask import Flask, redirect, url_for, request, jsonify, render_template
+from flask import Flask, redirect, url_for, request, jsonify, render_template, g
 from VersionScraper import get_versions
 from AlternateScraper import get_alternatives
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 import json
 import re
 import os
@@ -221,6 +221,7 @@ def login():
                 print ('successfully logged in')
                 # login user
                 login_user(user)
+                print(current_user)
                 return redirect(url_for('index'))
             else:
                 # show error
@@ -236,6 +237,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    print (current_user == None)
     return redirect(url_for('index'))
 
 @app.route('/version_track/api')
