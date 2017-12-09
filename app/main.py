@@ -206,6 +206,7 @@ def signup():
             db.session.commit()
             # login user
             login_user(newuser)
+            g.user = current_user
             return redirect(url_for('index'))
     else:
         return render_template('signup.html')
@@ -221,6 +222,7 @@ def login():
                 print ('successfully logged in')
                 # login user
                 login_user(user)
+                g.user = current_user
                 print(current_user)
                 return redirect(url_for('index'))
             else:
@@ -233,11 +235,15 @@ def login():
     else:
         return render_template('login.html')
 
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    return redirect(url_for('login'))
+
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    print (current_user == None)
+    g.user = None
     return redirect(url_for('index'))
 
 @app.route('/version_track/api')
