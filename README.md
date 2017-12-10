@@ -130,6 +130,8 @@ https://version-tracker.herokuapp.com/version_track/api?name=firefox&version=55
 <table>
 <tr>
 <td><img src="screenshots/vt_main.png"><br/>Store listing page</td>
+</tr>
+<tr>
 <td><img src="screenshots/vt_result.png"><br/>App information</td>
 </tr>
 </table>
