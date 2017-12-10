@@ -152,6 +152,20 @@ You can also know about softwares which can serve as an alternative to the softw
 </tr>
 </table>
 
+## How the app works?
+The application internally scrapes information from the web, structures the informations, stores it in its own database and then presents it to the user.
+### Workflow
+Let us see the workflow of the app. Let us consider you have searched skype on the app. The app will scrape information
+about skype from web. It will scrape information like, **all the releases of the software, its initial relelease date, 
+latest version of the app, similar softwares**. After collecting all these data it will structure them and at first store them in its own data base so that if another user searched for the same software, app will not have to scrape the web for a second time. Next the server will present the collected data in JSON format to the front end client which will display it
+to the user.
+
+#### Alternate workflow: Contributing to the app
+Users can contribute to the app by adding software versions, similar softwares and other versions. The main purpose of this
+feature is to **buld a community of VersionTracker users who will contribute to this app and build a rich data store of software info**
+
+**Contributing** to this app is really simple. Press on the contribute option present on the top right corner on the main page. You will need to signup in order to contribute. **VersionTracker** presently has a very basic auth system via email and password. This will be extended in future for notification, email and admin purposes.
+
 
 
 
