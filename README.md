@@ -195,11 +195,16 @@ Please follow the below given instructions to build the app locally
 ### Installing dependencies
 - This project is developed using python3. Make sure you have python3 installed.
 - Open the repository in your terminal. Make sure you are in the root of the repo. Execute the following-
+
   ``` pip install -r requirements.txt ```
+  
   This will install all the dependencies for this app.
+  
   If you encounter permission issues, please execute the above command with superuser access. For debian based systems like
   Ubuntu the command will be-
+  
   ``` sudo pip install -r requirements.txt ```
+  
   You may use virtualenv for building this app if you do not want to install dependencies in your global space.
 ### Installing Database
 Execute the following to install Postgres on your system-
