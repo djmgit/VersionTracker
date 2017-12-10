@@ -166,6 +166,22 @@ feature is to **buld a community of VersionTracker users who will contribute to 
 
 **Contributing** to this app is really simple. Press on the contribute option present on the top right corner on the main page. You will need to signup in order to contribute. **VersionTracker** presently has a very basic auth system via email and password. This will be extended in future for notification, email and admin purposes.
 
+After you are logged in, on pressing contribute you will be presented with a simple UI to enter software information. After filling up all the information press submit and your info will be recored in our database. Now others will be able to get information about the software whose data you have contributed.
+
+Note that the data which you have added is **subject to admin's review**. This is done mainly for validation and sanitisation purposes. These will be automated in future.
+
+### Admin system
+VersionTracker has got a basic admin system.
+Since the app is is testing phase, as of now the admin is open for exhibition purpose.
+Admin mailid: admin@admin.com
+Password: admin123
+Use the credentials for exploring the admin section. The admin section provides an interface to add software data, view the database, edit tables, etc. The admin can review the both the data which has been scraped and structured from the internet as well as the data which has been contributed by the user. He/she can edit or remove the data if he/she finds any thing wrong or invalid.
+
+Admin URL: https://version-tracker.herokuapp.com/admin
+
+
+
+
 
 
 
