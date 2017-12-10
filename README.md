@@ -18,9 +18,13 @@ after the version you are using. The app also suggests you alternative softwares
 
 ## REST API
 VersionTracker provides a RESTful service. The following endpoint is provided -
+
 **METHOD : GET**
+
 https://version-tracker.herokuapp.com/version_track/api?name=[software_name]&version=[software_version]
+
 For example: 
+
 https://version-tracker.herokuapp.com/version_track/api?name=firefox&version=55
 
 **Output**
@@ -183,7 +187,9 @@ Admin URL: https://version-tracker.herokuapp.com/admin
 
 **The app has been developed on Ubuntu 16.04 platform. The following instructions having given keeping Ubuntu OS in mind.
 However with some changes the app can easily be setup on other platforms like Arch or rpm based systems**
+
 Please follow the below given instructions to build the app locally
+
 ### Getting the source code
 - Clone this repository using ``` git clone https://github.com/djmgit/VersionTracker.git ```
 ### Installing dependencies
