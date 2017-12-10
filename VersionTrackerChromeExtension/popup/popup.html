@@ -1,13 +1,46 @@
 <html>
   <head>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/angular.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   </head>
   <body>
     <div class="main-app" ng-app="exApp" ng-controller="exCtrl">
-      
+      <div class="container">
+        <div class="soft-ver-search">
+            
+            <input type="text" class="form-control soft" ng-model='name'>
+            
+            
+            <input type="text" class="form-control ver" ng-model='version'>
+            
+            <button type="button" class="btn btn-default" ng-click="search()"> Search </button>
+        </div>
+        <div class="main-info">
+          <div class="gen-info">
+            <div class="initial-release">
+              <div class="header">
+                <h4>Initial Release</h4>
+              </div>
+              <div class="content">
+                {{ initialRelease }}
+              </div>
+            </div>
+            <div class="latest">
+              <div class="header">
+                <h4>Latest Release</h4>
+              </div>
+              <div class="content">
+                {{ latestRelease }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
   </body>
 </html>

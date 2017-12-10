@@ -4,4 +4,28 @@
 	font-family: "Times New Roman", Times, serif;
 	overflow-y: auto;
 	overflow-x: hidden;
+	padding-top: 10px;
+}
+
+.soft-ver-search {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.soft {
+	margin-right: 10px;
+}
+
+.ver {
+	margin-right: 10px;
+}
+
+.gen-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 10px;
 }
