@@ -127,5 +127,12 @@ https://version-tracker.herokuapp.com/version_track/api?name=firefox&version=55
 }
 ```
 ## How to use the Web app
+<table>
+<tr>
+<td><img src="screenshots/vt_main.png"><br/>Store listing page</td>
+<td><img src="screenshots/vt_result.png"><br/>App information</td>
+</tr>
+</table>
+
 
 
