@@ -243,6 +243,21 @@ htttp://127.0.0.1:5000
 ```
 The fron end has been tested on **Google Chrome** and **Firefox**
 
+## Chrome Extension
+
+This repository also contains a Chrome extension for VersionTracker
+Follow the steps below to run the extension.
+
+**Note:You will require Google Chrome for running this**
+
+- Open Google Chrome
+- Select **More tools** from chrome menu, that is, the three dots present at the top right corner of Google Chrome
+- Select **Extensions** from the submenu
+- Check **Developer mode**
+- Press on **Load unpacked extension** and select **manifest.json** present inside **VersionTrackerChromeExtension**
+  directory present in this repository.
+- VersionTecker icon will appear on browser. Now you are ready to use the extension!
+
 ## Project structure
 
 - app/ : Contains the web API, web app and the scrapers
