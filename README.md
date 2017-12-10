@@ -136,5 +136,15 @@ https://version-tracker.herokuapp.com/version_track/api?name=firefox&version=55
 </tr>
 </table>
 
+Enter the name of your software and version in the respective fields and press search. Wait for some time as it may take a while to generate your result. Once the result is generated, it will be displayed on screen. You will be informed whether version is obsolete or not. How many new versions have been released. What was the initial release date of the software.
+What is the latest version available.
+You can also view all the versions of the software relased by pressing on View all releases.
+<table>
+<tr>
+<td><img src="screenshots/vt_versions.png"><br/>Store listing page</td>
+</tr>
+</table>
+
+
 
 
