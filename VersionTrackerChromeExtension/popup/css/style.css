@@ -1,0 +1,7 @@
+.main-app {
+	width: 380px;
+	height: 420px;
+	font-family: "Times New Roman", Times, serif;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
