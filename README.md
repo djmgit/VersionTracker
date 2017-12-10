@@ -126,5 +126,6 @@ https://version-tracker.herokuapp.com/version_track/api?name=firefox&version=55
   ]
 }
 ```
+## How to use the Web app
 
 
