@@ -15,6 +15,12 @@
             
             <button type="button" class="btn btn-default" ng-click="search()"> Search </button>
         </div>
+        <div class="intro">
+            Search softwares. Checkout if your version has become obsolete or not. Find out if its time to update your software. How many new versions have been released. What is the lastest version. Enter your software name and version above and hit search to find out!
+        </div>
+        <div class="not-found">
+            Software not found !! Please try a different name.
+        </div>
         <div class="main-info">
           <div class="gen-info">
             <div class="initial-release">
@@ -33,6 +39,43 @@
                 {{ latestRelease }}
               </div>
             </div>
+          </div>
+          <div class="ver-and-sim">
+            <button class="btn btn-default" ng-click="viewReleases()">View all Releases</button>
+            <button class="btn btn-default" ng-click="viewSimilar()">View similar softwares</button>
+          </div>
+          <div class="versions">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <td> {{ name }} </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="ver in versions track by $index">
+                  <td> {{ ver }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="similar">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <td> {{ name }} </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="sim in similarSoftwares track by $index">
+                  <td> {{ sim }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="status">
+            {{ status }}
           </div>
         </div>
       </div>

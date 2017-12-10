@@ -7,11 +7,25 @@
 	padding-top: 10px;
 }
 
+.main-info {
+	display: none;
+}
+
+.intro {
+	text-align: center;
+	margin-top: 20px;
+}
+
 .soft-ver-search {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.not-found {
+	text-align: center;
+	margin-top: 20px;
 }
 
 .soft {
@@ -28,4 +42,27 @@
 	align-items: center;
 	justify-content: space-around;
 	margin-top: 10px;
+}
+
+.latest {
+	margin-left: 10px;
+}
+
+.status {
+	margin-top: 10px;
+}
+
+.ver-and-sim {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.versions {
+	display: none;
+}
+
+.similar {
+	display: none;
 }
