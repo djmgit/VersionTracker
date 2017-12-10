@@ -243,6 +243,17 @@ htttp://127.0.0.1:5000
 ```
 The fron end has been tested on **Google Chrome** and **Firefox**
 
+## Project structure
+
+- app/ : Contains the web API, web app and the scrapers
+- app/VersionScraper.py : Code to scrape data from web
+- app/AlternateScraper.py : Collects names of alternate software
+- app/main.py : API and Web server
+- app/static : Static files like JS and CSS files
+- app/templates : App templates, HTML files
+
+- VersionTrackerChromeExtension : Contains a chrome extension for VersionTracker
+- VersionTrackerChromeExtension/popup : Contains code for the popup
 
 
 
